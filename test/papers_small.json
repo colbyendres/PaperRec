@@ -1,0 +1,358 @@
+{
+  "machine learning": [
+    {
+      "paperId": "0090023afc66cd2741568599057f4e82b566137c",
+      "title": "A Survey on Bias and Fairness in Machine Learning",
+      "recommendations": [
+        {
+          "paperId": "8f8478d74c312f8ac6b8d4fb9fc50e3e6ec2d549",
+          "title": "BIAS IN ARTIFICIAL INTELLIGENCE: AN ANALYSIS WITH SPECIAL FOCUS ON AUTOMATED CONTENT MODERATION"
+        },
+        {
+          "paperId": "91ce4e6ad8eb5227744df0f6c8e2bf4fd8d1d883",
+          "title": "Explaining Fairness Violations using Machine Unlearning"
+        },
+        {
+          "paperId": "c1dc05b322ff5f7bd784d056920772de9ed55b7d",
+          "title": "Exploration of Potential New Benchmark for Fairness Evaluation in Europe"
+        },
+        {
+          "paperId": "53a0bac11eee69dd2f95f683fb7851117c4f99d0",
+          "title": "From Laws to Algorithms: Detecting Unfairness in Machine Learning Models"
+        },
+        {
+          "paperId": "de89f6d78e6ca015cd44077f0072860f784b14a9",
+          "title": "Addressing Bias in Natural Language Processing (NLP) Models: Techniques and Implications"
+        }
+      ]
+    },
+    {
+      "paperId": "597bd2e45427563cdf025e53a3239006aa364cfc",
+      "title": "Open Graph Benchmark: Datasets for Machine Learning on Graphs",
+      "recommendations": [
+        {
+          "paperId": "33f9f146f4258a13889f75760502b230d472b039",
+          "title": "G-OSR: A Comprehensive Benchmark for Graph Open-Set Recognition"
+        },
+        {
+          "paperId": "a9c2f56ef61ec5ca6d8b47179aeec6999844e75d",
+          "title": "Exploring Graph Tasks with Pure LLMs: A Comprehensive Benchmark and Investigation"
+        },
+        {
+          "paperId": "f07646796bb0869712b185177e71d32d17b5e377",
+          "title": "GiGL: Large-Scale Graph Neural Networks at Snapchat"
+        },
+        {
+          "paperId": "9da5571ca6b8657af23bcb51fdf2ecc5a01ebf65",
+          "title": "Graph Neural Networks for Databases: A Survey"
+        },
+        {
+          "paperId": "ee0a9ccaa6ff27bb71bf3b867b2a4429ac48f6d6",
+          "title": "Towards Quantifying Long-Range Interactions in Graph Machine Learning: a Large Graph Dataset and a Measurement"
+        }
+      ]
+    }
+  ],
+  "information retrieval": [
+    {
+      "paperId": "08fb24d7e57db7de0da428676b1a0a6903051442",
+      "title": "Doubly Efficient Private Information Retrieval and Fully Homomorphic RAM Computation from Ring LWE",
+      "recommendations": [
+        {
+          "paperId": "8b43c483e532d67e9e053915118acec2b4fb6f3c",
+          "title": "Distributional Private Information Retrieval"
+        },
+        {
+          "paperId": "195a8b3860758d92b967b26511900dc56d4a4995",
+          "title": "Efficient Linear Secure Computation and Symmetric Private Information Retrieval Protocols"
+        },
+        {
+          "paperId": "35b1e7726fcbd74fa0be99dba012462783dd5c65",
+          "title": "Non-Interactive Verifiable Aggregation"
+        },
+        {
+          "paperId": "c1fd692ced2db5f2f08d2f04c39c941e4a992161",
+          "title": "Labeled Private Set Intersection From Distributed Point Function"
+        },
+        {
+          "paperId": "85be66dd85448f81c1f901f9928f4194d7713b7a",
+          "title": "Pseudorandom Functions with Weak Programming Privacy and Applications to Private Information Retrieval"
+        }
+      ]
+    },
+    {
+      "paperId": "f00fc5531564aef9205104dec31fe25c94e6b4ea",
+      "title": "Deceptive Information Retrieval",
+      "recommendations": [
+        {
+          "paperId": "8b43c483e532d67e9e053915118acec2b4fb6f3c",
+          "title": "Distributional Private Information Retrieval"
+        },
+        {
+          "paperId": "f6b22d8039e31adf80885c653b4404dbbece3e76",
+          "title": "A Low-Complexity Scheme for Multi-Message Private Information Retrieval"
+        },
+        {
+          "paperId": "ae1300fc1bac3f3ac89e618747cf42c06b89a697",
+          "title": "Practical Keyword Private Information Retrieval from Key-to-Index Mappings"
+        },
+        {
+          "paperId": "c17dc5a48d99465a08785e24c553c0a980a131e6",
+          "title": "Natural Language Processing for Improving Search Query Results"
+        },
+        {
+          "paperId": "7a76b13c94f7f74ab50bab93537902155c7f7e68",
+          "title": "Probabilistic analysis of data structures for locality-sensitive hashing functions"
+        }
+      ]
+    },
+    {
+      "paperId": "9af8bccf3e42996cbb198a6ceccafa2a084689f6",
+      "title": "HybridRAG: Integrating Knowledge Graphs and Vector Retrieval Augmented Generation for Efficient Information Extraction",
+      "recommendations": [
+        {
+          "paperId": "bb73fbee40cd09431b53a1a6b958b41f6701d8c4",
+          "title": "Talking to GDELT Through Knowledge Graphs"
+        },
+        {
+          "paperId": "3c22ea27cac88f9dbb4ea08fbdf44a1d9777978c",
+          "title": "Pseudo-Knowledge Graph: Meta-Path Guided Retrieval and In-Graph Text for RAG-Equipped LLM"
+        },
+        {
+          "paperId": "00e92a3b206b7acb75ddb6dfc5fdaa80190cec78",
+          "title": "PathRAG: Pruning Graph-based Retrieval Augmented Generation with Relational Paths"
+        },
+        {
+          "paperId": "d500f728daff3a345d945887f436a25c2a78eb91",
+          "title": "ArchRAG: Attributed Community-based Hierarchical Retrieval-Augmented Generation"
+        },
+        {
+          "paperId": "e2eb27ab435a3507c2926e39b4e47e763fc6e47f",
+          "title": "SRAG: Structured Retrieval-Augmented Generation for Multi-Entity Question Answering over Wikipedia Graph"
+        }
+      ]
+    },
+    {
+      "paperId": "859cbed6555319c3c31b84c1001a1df9a34889e2",
+      "title": "Evaluating Token-Level and Passage-Level Dense Retrieval Models for Math Information Retrieval",
+      "recommendations": [
+        {
+          "paperId": "53615f5e4d2587519be7ed0f2136d3150f2465e2",
+          "title": "Dense Passage Retrieval in Conversational Search"
+        },
+        {
+          "paperId": "8c321c3a2cb7737d23014879096bd709b01e44c5",
+          "title": "Optimizing Retrieval Strategies for Financial Question Answering Documents in Retrieval-Augmented Generation Systems"
+        },
+        {
+          "paperId": "5af10e53941c4256cdd8d27b04eb1ca8f1f76218",
+          "title": "From Retrieval to Generation: Comparing Different Approaches"
+        },
+        {
+          "paperId": "d1db1c018d37390ccfbd196703ad90c1fcdfb76f",
+          "title": "Pseudo-Relevance Feedback Can Improve Zero-Shot LLM-Based Dense Retrieval"
+        },
+        {
+          "paperId": "065ab6acd92293a0fb6124976a013cb1f2d1e060",
+          "title": "Teaching Dense Retrieval Models to Specialize with Listwise Distillation and LLM Data Augmentation"
+        }
+      ]
+    },
+    {
+      "paperId": "9fdf2f248f509361a5eae8fea2a3e2fc8692b2b1",
+      "title": "On Single Server Private Information Retrieval With Private Coded Side Information",
+      "recommendations": [
+        {
+          "paperId": "f6b22d8039e31adf80885c653b4404dbbece3e76",
+          "title": "A Low-Complexity Scheme for Multi-Message Private Information Retrieval"
+        },
+        {
+          "paperId": "8b43c483e532d67e9e053915118acec2b4fb6f3c",
+          "title": "Distributional Private Information Retrieval"
+        },
+        {
+          "paperId": "0173b93515e9956fc5942d3efeb00da8c5edb506",
+          "title": "On k-Mer-Based and Maximum Likelihood Estimation Algorithms for Trace Reconstruction"
+        },
+        {
+          "paperId": "1ef14f27b6f21cbe99f03317e14482b21a909fd7",
+          "title": "Non-Linear Function Computation Broadcast"
+        },
+        {
+          "paperId": "85be66dd85448f81c1f901f9928f4194d7713b7a",
+          "title": "Pseudorandom Functions with Weak Programming Privacy and Applications to Private Information Retrieval"
+        }
+      ]
+    }
+  ],
+  "mathematical physics": [
+    {
+      "paperId": "6311473c7c614ad29b5c0e6b94deec428219113f",
+      "title": "Asymptotic Methods in Equations of Mathematical Physics",
+      "recommendations": [
+        {
+          "paperId": "f7f21dda7101f2f5261202878ead97df8c1cae59",
+          "title": "NONLOCAL PROBLEMS FOR A MIXED PARABOLIC-HYPERBOLIC EQUATION OF THE THIRD ORDER"
+        },
+        {
+          "paperId": "39ad1eca0895611c3eb67eeab066e9fdd2a622ec",
+          "title": "Simple third order operator-splitting schemes for stochastic mechanics and field theory"
+        },
+        {
+          "paperId": "94604d1c33e97697434407aec5874dd3cf672c48",
+          "title": "On solvability of some boundary value problems for a nonlocal Poisson equation with periodic conditions"
+        },
+        {
+          "paperId": "4f077d26c6617b8494b0f6ec99866b2e3d3ac48a",
+          "title": "Recent advances about the rigorous integration of parabolic PDEs via fully spectral Fourier-Chebyshev expansions"
+        },
+        {
+          "paperId": "32b00467ed393593c279fa853cd85dc4f3876c5d",
+          "title": "Traveling-Wave Solutions of Several Nonlinear Mathematical Physics Equations"
+        }
+      ]
+    },
+    {
+      "paperId": "43cfaeca3d4dd1af8fa5e27754c47f050000c184",
+      "title": "Student’s need analysis in using ordinary differential equation e-module of Mathematical Physics II",
+      "recommendations": [
+        {
+          "paperId": "12116366691dc144a64126ea19b1e011b6cf3213",
+          "title": "Analysis of Mathematical Communication Skills of High School Students on Matrix Material"
+        },
+        {
+          "paperId": "7bf1368247a6fffdde38731bd4fcd519f1179250",
+          "title": "Analysis of Students' Mathematics Learning Outcomes on Matrix Concepts: A Comparative Study"
+        },
+        {
+          "paperId": "c0b9a3c5b2aed717e969b0d271fc4342f8fb9dcd",
+          "title": "Analysis of Students' Mathematical Problem-solving Ability on Number Matter"
+        },
+        {
+          "paperId": "5ae22fe72b0249d0e7134e95f74b5e1383ec276c",
+          "title": "The Effectiveness of the Realistic Mathematics Education Approach to Improve Students' Creativity in Learning Mathematics"
+        },
+        {
+          "paperId": "1cd6db00faca962c0fb5a957f50ba2916728fb39",
+          "title": "Resolving Learners Differences in the Learning of Mathematics"
+        }
+      ]
+    },
+    {
+      "paperId": "757dd5fbc67d8f2591eb2077180af74c1797fcd1",
+      "title": "Methods of Mathematical Physics",
+      "recommendations": [
+        {
+          "paperId": "99aeaeb44d0e6d84b396b1014dfccbc077b0d336",
+          "title": "Mechanics of nature"
+        },
+        {
+          "paperId": "32531d62cc2c2caa8e3869d4932945e2e27c733e",
+          "title": "The rise of stochasticity in physics"
+        },
+        {
+          "paperId": "4617bfe4a65da6fed870256c4ce4b4c124aab23d",
+          "title": "Hidden symmetries in Hamiltonian geometry, topology, physics and mechanics"
+        },
+        {
+          "paperId": "895b57ecf7d84216b9b5129c4b34cfbc31b51630",
+          "title": "A brief introduction to fluctuation theorems: from theory to experiments"
+        },
+        {
+          "paperId": "071e77e491f66966e666e92d2a31cf6092005bc2",
+          "title": "Algebraic and Positive Geometry of the Universe: from Particles to Galaxies"
+        }
+      ]
+    }
+  ],
+  "commutative algebra": [
+    {
+      "paperId": "a78c4d8308ec99087ec817b7984aaadbbf2ab25d",
+      "title": "Commutative Algebra: with a View Toward Algebraic Geometry",
+      "recommendations": [
+        {
+          "paperId": "6333bd4a53b8531ba1f21b6198cc602c45456106",
+          "title": "An elementary algebraic proof of the fundamental theorem of algebra"
+        },
+        {
+          "paperId": "fa6a1fe0626b0c857f8000a029d4ac57ff461ae4",
+          "title": "Aspects of Condensed Mathematics -- From Abstract Nonsense to Ergodic Theory"
+        },
+        {
+          "paperId": "209589b6a1f4d3e0b5ab8310f0344e80aef53b65",
+          "title": "A Shape Lemma for Ideals of Differential Operators"
+        },
+        {
+          "paperId": "82caac6e3215b78363330bbc5c4793b4755c9a96",
+          "title": "Homological dimensions over almost gentle algebras"
+        },
+        {
+          "paperId": "6a11a252c1ba215126442f0dac7429b07fc398c4",
+          "title": "Algebraic normalisation"
+        }
+      ]
+    },
+    {
+      "paperId": "c1e93692a09c773db1982a66c073682395ebe830",
+      "title": "Dirac Geometry I: Commutative Algebra",
+      "recommendations": [
+        {
+          "paperId": "e678d86915e721bc1ba64557ec90b77209a01f7e",
+          "title": "On the emergence of an almost-commutative spectral triple from a geometric construction on a configuration space"
+        },
+        {
+          "paperId": "b45613565aabfde6dce5e736233546d76237f975",
+          "title": "Inverse Hamiltonian reduction in type A and generalized slices in the affine Grassmannian"
+        },
+        {
+          "paperId": "5ba55a93fc13e8294fdc7e7d069fa909ac12e51a",
+          "title": "Some Constructions on Quantum Principal Bundles"
+        },
+        {
+          "paperId": "f44128718dd9be180a5b0496934847f2728b44e5",
+          "title": "Dirac Operators on Orbifold Resolutions: Uniform Elliptic Theory"
+        },
+        {
+          "paperId": "a40f370af22a676bc127a008ca29839b88376489",
+          "title": "Quantization of Lie-Poisson algebra and Lie algebra solutions of mass-deformed type IIB matrix model"
+        }
+      ]
+    },
+    {
+      "paperId": "19bf4cc7bb782d3377302fa8692880e434551846",
+      "title": "Commutative Algebra",
+      "recommendations": [
+        {
+          "paperId": "b356e50ca7c4d5ef5e1225e5e4fe0fd65dcbea39",
+          "title": "Symmetric 2-(35,17,8) designs with an automorphism of order 2"
+        }
+      ]
+    },
+    {
+      "paperId": "1a3c19d080a63e0b67890e32050ba832f9d596eb",
+      "title": "Commutative Algebra",
+      "recommendations": [
+        {
+          "paperId": "18efcede4d787ee0a58906c918e20f3f7204b3ab",
+          "title": "CW-complexes and Hilbert vector of standard graded Artinian Gorenstein algebras"
+        },
+        {
+          "paperId": "c9cfcd1b1e81d0d2af2a39fc01435d4c4ff1e8cb",
+          "title": "A linear AFL for quaternion algebras"
+        },
+        {
+          "paperId": "e9239d3a7c11b58fa182801060e06c077225efd1",
+          "title": "The Commutativity Condition of the Ring"
+        },
+        {
+          "paperId": "5c2dd1a4f4ea40c52ba27e5c393c6e493bc7cbd5",
+          "title": "Graded Frobenius algebras from tensor algebras of bimodules"
+        },
+        {
+          "paperId": "6ddd9b1f94854eaf1fc564331f4a5373f79d94ac",
+          "title": "Spectral Theory on Unital Commutative full Symmetric Krein C*-Algebras"
+        }
+      ]
+    }
+  ]
+}
