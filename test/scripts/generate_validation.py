@@ -14,6 +14,21 @@ IS_PROBABLY_ENGLISH = re.compile(r'[a-zA-Z]+')
 def is_english_title(title):
     return bool(re.match(IS_PROBABLY_ENGLISH, title))
 
+# Semantic Scholar is rather stringent with its rate limits if you don't have an API key
+# Apply exponential backoff for HTTP requests to play nice
+def get_with_backoff(url, params, attempts=5):
+    backoff = 5
+    for _ in range(attempts):
+        r = requests.get(url, params=params)
+        if r.status_code == 429:
+            backoff *= 2
+            time.sleep(backoff)
+            continue
+        return r.json()
+
+    # Failed to get data
+    return None 
+
 # Retrieve relevant papers from Semantic Scholar for given query
 def search_semantic_scholar(query, paper_limit=100, attempts=5):
     url = "http://api.semanticscholar.org/graph/v1/paper/search/"
@@ -25,31 +40,25 @@ def search_semantic_scholar(query, paper_limit=100, attempts=5):
         "sort" : "citationCount:desc"
     }
 
-    # Semantic Scholar is rather stringent with its rate limits if you don't have an API key
-    # Apply exponential backoff to play nice
-    backoff = 5
-    for _ in range(attempts):
-        r = requests.get(url, params=params)
-        if r.status_code == 429:
-            backoff *= 2
-            time.sleep(backoff)
-            continue
-        return r.json().get("data", [])
-
-    # Failed to get data
-    return None 
+    rsp = get_with_backoff(url, params)
+    return rsp.get('data', [])
 
 # Returns top k recommendations for a given paper
 def find_recommendations(ss_id, limit):
-    rsp = requests.get(f"https://api.semanticscholar.org/recommendations/v1/papers/forpaper/{ss_id}",
-                       params={'fields': 'title,paperId', 'limit': limit, 'sort' : 'citationCount:desc'})
-    rsp.raise_for_status()
-    results = rsp.json()
-    return results['recommendedPapers']
+    url = f"https://api.semanticscholar.org/recommendations/v1/papers/forpaper/{ss_id}"
+    params = {
+        'fields': 'title,paperId', 
+        'limit': limit, 
+        'sort' : 'citationCount:desc' # Sort by highest citation count
+        }
+    rsp = get_with_backoff(url, params)
+    return rsp.get('recommendedPapers', [])
 
 # Write the papers to a JSON file
 def write_json(queries, papers_per_query, file_name, recs_per_paper):
     data = {}
+    # Multiplicative factor to which oversample recommendations
+    # This is necessary, as some recommendations may be ineligible
     OVERSAMPLE = 2
     for q in queries:
         papers = search_semantic_scholar(q, papers_per_query)
@@ -64,9 +73,8 @@ def write_json(queries, papers_per_query, file_name, recs_per_paper):
             recs = find_recommendations(paper['paperId'], OVERSAMPLE * recs_per_paper)
             
             # Reject any paper that isn't written in English
-            recs = [rec for rec in recs if is_english_title(rec.get('title', ''))]
-            if len(recs) > recs_per_paper:
-                recs = recs[:recs_per_paper]
+            # Trim list to meet limit, if not too many disqualifications
+            recs = [rec for rec in recs if is_english_title(rec.get('title', ''))][:recs_per_paper]
 
             # Reject any paper that has no English recommendations
             if not recs:
@@ -92,6 +100,10 @@ if __name__ == '__main__':
         recs_per_paper = int(sys.argv[2])
 
     QUERIES = ['machine learning', 'information retrieval', 'mathematical physics', 'commutative algebra']
+    FILE_PATH = '../papers_large.json'
+    
+    # A query can return at max 100 results (API limitation)
     papers_per_query = num_papers // len(QUERIES)
-    file_path = '../papers_small.json'
-    write_json(QUERIES, papers_per_query, file_path, recs_per_paper)
+    assert papers_per_query <= 100 
+    
+    write_json(QUERIES, papers_per_query, FILE_PATH, recs_per_paper)
