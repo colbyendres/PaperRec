@@ -3,11 +3,6 @@ faiss-cpu
 numpy
 pandas
 rank-bm25
-faiss
 pandas
 nltk
-re
-os
-glob
-tarfile
-gzip
+IPython
