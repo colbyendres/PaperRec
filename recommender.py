@@ -1,83 +1,81 @@
-import numpy as np
-import re
-import os
 import pandas as pd
-import faiss
+import numpy as np
 from sentence_transformers import SentenceTransformer
-from nltk.tokenize import word_tokenize
-from rank_bm25 import BM25Okapi
 
 class ResearchPaperRecommender:
-    def __init__(self, label_path, paper_path):
-        # Load embeddingsa
-        self.paper_embeddings = np.load(paper_path).astype('float32')
-        num_papers = len(self.paper_embeddings)
+    def __init__(self, df_path):
+        self.df = pd.read_csv(df_path)
+        self.model = SentenceTransformer('all-MiniLM-L6-v2')
+        self.label_embeddings = self._calculate_label_embeddings(zip(self.df['title'], self.df['labels']))
+        self.title_embeddings = self._calculate_title_embeddings(self.df['title'])
 
-        # Create synthetic paper data (using first 'num_papers' labels)
-        self.paper_labels = np.load(label_path).astype('float32')
+    # Precompute embeddings of each label
+    # NOTE: This can be made redundant if we store the embeddings instead of the plaintext labels
+    def _calculate_label_embeddings(self, data):
+        embeddings = {}
+        for title, labels in data:
+            s = self.model.encode(labels)
+            embeddings[title] = s / np.linalg.norm(s)
+        return embeddings
+    
+    def _calculate_title_embeddings(self, titles):
+        embeddings = {}
+        for title in titles:
+            s = self.model.encode(title)
+            embeddings[title] = s / np.linalg.norm(s)
+        return embeddings
+    
+    # Find paper in dataframe closest to query_title
+    # Used as a fallback in case the user asks for a paper we don't know about
+    def find_closest_title(self, query_title):
+        query_embedding = self.model.encode(query_title)
+        query_norm = np.linalg.norm(query_embedding)
+        best_score = 0
+        best_title = ''
 
-        # Create dataframe
-        self.papers_df = pd.DataFrame({
-            'title': [f"Paper {i+1}" for i in range(num_papers)],
-            'labels': self.paper_labels,
-            'abstract': [f"This paper discusses {label.lower()}. It presents novel findings." for label in self.paper_labels],
-            'url': [f"http://example.com/paper_{i+1}" for i in range(num_papers)]
-        })
+        for title, embedding in self.title_embeddings.items():
+            s = np.dot(query_embedding, embedding) / query_norm
+            if s > best_score:
+                best_score = s 
+                best_title = title
+        
+        return best_title
 
-        # Initialize models
-        self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
-        self._prepare_indices()
-        self._prepare_bm25()
-
-    def _prepare_indices(self):
-        """Prepare FAISS index for semantic search"""
-        self.dimension = self.paper_embeddings.shape[1]
-        self.semantic_index = faiss.IndexFlatIP(self.dimension)
-        faiss.normalize_L2(self.paper_embeddings)
-        self.semantic_index.add(self.paper_embeddings)
-
-    def _prepare_bm25(self):
-        """Prepare BM25 index for keyword search"""
-        processed_labels = self.papers_df['labels'].apply(self._preprocess_text)
-        self.tokenized_labels = [word_tokenize(doc) for doc in processed_labels]
-        self.bm25 = BM25Okapi(self.tokenized_labels)
-
-    def _preprocess_text(self, text):
-        """Basic text cleaning"""
-        text = re.sub(r'[^a-zA-Z0-9\s]', '', text.lower())
-        return text
-
-    def recommend(self, query, top_k=5, hybrid=True):
-        """Get paper recommendations"""
+    def recommend(self, title, top_n=5):
         try:
-            # Preprocess query
-            processed_query = self._preprocess_text(query)
+            query_row = self.df[self.df['title'] == title].iloc[0]
+        except IndexError:
+            best_title = self.find_closest_title(title)
+            print(f"LOG: Title not found in database, using closest paper {best_title}")
+            return self.recommend(best_title, top_n)
 
-            # Semantic search
-            query_embedding = self.embedding_model.encode([query], convert_to_tensor=False).astype('float32')
-            faiss.normalize_L2(query_embedding)
-            D, I = self.semantic_index.search(query_embedding, top_k*2)  # D = distances, I = indices
+        # Narrow our search space to only include papers in the same cluster as the query
+        centroid_paper = query_row['cluster']
+        similar_cluster_df = self.df[(self.df['cluster'] == centroid_paper) & (self.df['title'] != title)].copy()
 
-            # Keyword search
-            tokenized_query = word_tokenize(processed_query)
-            bm25_scores = self.bm25.get_scores(tokenized_query)
+        if similar_cluster_df.empty:
+            print(f"No other papers found in the same cluster as '{title}'.")
+            return []
 
-            if hybrid:
-                # Get top BM25 scores for the same papers
-                bm25_top_scores = np.array([bm25_scores[i] for i in I[0]])
+        # Compute similarity scores between query and candidate embeddings
+        query_embedding = self.label_embeddings[title]
+        candidate_titles = list(similar_cluster_df['title'])
+        similarity_scores = np.array([np.dot(query_embedding, self.label_embeddings[cand]) for cand in candidate_titles])
+        best_idx = np.argsort(similarity_scores)[-top_n:]
 
-                # Normalize scores
-                semantic_norm = D[0] / np.max(D[0])
-                bm25_norm = bm25_top_scores / np.max(bm25_top_scores)
+        return [candidate_titles[i] for i in best_idx]
+        
+    
+if __name__ == '__main__':
+    DATAFRAME_PATH = './dataset/test.csv'
+    r = ResearchPaperRecommender(DATAFRAME_PATH)
+    while True:
+        title = input('Input a title for similar papers (q to quit): ')
+        if title == 'q':
+            break
+        results = r.recommend(title)
+        for i, res in enumerate(results):
+            print(f"{i+1}: {res}")
 
-                # Combine scores
-                combined_scores = 0.7 * semantic_norm + 0.3 * bm25_norm
-                top_indices = I[0][np.argsort(combined_scores)[::-1][:top_k]]
-            else:
-                top_indices = I[0][:top_k]
 
-            return self.papers_df.iloc[top_indices]
-        except Exception as e:
-            print(f"Error during recommendation: {str(e)}")
-            return pd.DataFrame()
-
+    
