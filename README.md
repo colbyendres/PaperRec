@@ -15,8 +15,8 @@ If you would like to supply your own dataset, the recommendation engine requires
 ```
 title: Paper Title
 labels: A space-separated string of labels pertinent to the given paper
-cluster: The centroid title of the cluster containing 'title'. This must be a title present in the dataframe
+cluster: The cluster ID containing the given paper
 ```
-With this, you can use your custom data by modifying the `DATASET_FILE` variable within `recommender.py`
+With this, you can use your custom data by modifying the `DATASET_FILE` variable within `recommender.py`. By default, we use `labels_with_cluster.csv`
 
 
