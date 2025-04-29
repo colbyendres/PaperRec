@@ -67,7 +67,7 @@ class ResearchPaperRecommender:
         
     
 if __name__ == '__main__':
-    DATAFRAME_PATH = './dataset/test.csv'
+    DATAFRAME_PATH = './dataset/all_labels.csv'
     r = ResearchPaperRecommender(DATAFRAME_PATH)
     while True:
         title = input('Input a title for similar papers (q to quit): ')
