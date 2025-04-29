@@ -1,28 +1,49 @@
 import pandas as pd
 import numpy as np
+import pickle
+import os
 from sentence_transformers import SentenceTransformer
 
 class ResearchPaperRecommender:
     def __init__(self, df_path):
         self.df = pd.read_csv(df_path)
         self.model = SentenceTransformer('all-MiniLM-L6-v2')
-        self.label_embeddings = self._calculate_label_embeddings(zip(self.df['title'], self.df['labels']))
+        self.label_embeddings = self._calculate_label_embeddings(zip(self.df['title'], self.df['label']))
         self.title_embeddings = self._calculate_title_embeddings(self.df['title'])
 
     # Precompute embeddings of each label
-    # NOTE: This can be made redundant if we store the embeddings instead of the plaintext labels
+    # Cache the results to the embedding folder, so we only pay the generation cost once
     def _calculate_label_embeddings(self, data):
+        CACHED = 'embeddings/label_embeddings'
+        if os.path.exists(CACHED):
+            with open(CACHED, 'rb') as fp:
+                return pickle.load(fp)
+        
+        print(f"No label embeddings found at {CACHED}, creating manually")
         embeddings = {}
         for title, labels in data:
             s = self.model.encode(labels)
             embeddings[title] = s / np.linalg.norm(s)
+
+        with open(CACHED, 'wb') as fp:
+            pickle.dump(embeddings, fp)
         return embeddings
     
     def _calculate_title_embeddings(self, titles):
+        CACHED = 'embeddings/title_embeddings'
+        if os.path.exists(CACHED):
+            with open(CACHED, 'rb') as fp:
+                return pickle.load(fp)
+        
+        print(f"No title embeddings found at {CACHED}, creating manually")
         embeddings = {}
         for title in titles:
-            s = self.model.encode(title)
+            s = self.model.encode(str(title))
             embeddings[title] = s / np.linalg.norm(s)
+        
+        with open(CACHED, 'wb') as fp:
+            pickle.dump(embeddings, fp)
+
         return embeddings
     
     # Find paper in dataframe closest to query_title
@@ -67,7 +88,7 @@ class ResearchPaperRecommender:
         
     
 if __name__ == '__main__':
-    DATAFRAME_PATH = './dataset/all_labels.csv'
+    DATAFRAME_PATH = './dataset/labels_with_cluster.csv'
     r = ResearchPaperRecommender(DATAFRAME_PATH)
     while True:
         title = input('Input a title for similar papers (q to quit): ')
