@@ -8,6 +8,7 @@ git clone git@github.com:colbyendres/PaperRec.git
 pip install -r requirements.txt
 python recommender.py
 ```
+Download the embeddings pkl file https://drive.google.com/file/d/1Blyt4V5qiPfGUNPzat8ok0LzDFEn3R2n/view?usp=sharing
 
 # Custom Data
 If you would like to supply your own dataset, the recommendation engine requires a DataFrame with the following fields:
